@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANG GABAY | Sign Up</title>
+<style>
+        * {
+            box-sizing: border-box;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 60px;
+            padding: 0 12px;
+            gap: 18px;
+            position: relative;
+            z-index: 5;
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        .menu-btn {
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            display: block;
+            width: 220px;
+            height: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex: 1;
+            height: 100%;
+            gap: 15px;
+        }
+
+        nav a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        nav a:hover {
+            color: #e6c84b;
+        }
+
+        .header-icon {
+            flex-shrink: 0;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -260px;
+            width: 260px;
+            height: 100vh;
+            z-index: 10;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px 25px;
+        }
+
+        .sidebar a:hover {
+            background-color: #174675;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        #menu-toggle:checked~.sidebar {
+            left: 0;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 8;
+        }
+
+        #menu-toggle:checked~.overlay {
+            display: block;
+        }
+
+        .banner {
+            width: 100%;
+            min-height: 235px;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content {
+            width: 60%;
+            padding: 20px 0 20px 4%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 4px 10px;
+        }
+
+        .banner h1 {
+            margin: 0 0 10px;
+        }
+
+        .description {
+            margin: 0 0 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 8px 12px;
+        }
+
+        .button:hover {
+            background-color: #ffe58a;
+            transform: translateY(-2px);
+        }
+
+        .quote {
+            position: absolute;
+            right: 3%;
+            top: 35%;
+            z-index: 1;
+        }
+
+        .page-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 180px;
+            gap: 18px;
+            align-items: start;
+            padding: 16px;
+        }
+
+        .main-news {
+            min-width: 0;
+        }
+
+        .mojo-aside {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .mojo-aside img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .PATOK {
+            margin: 0 0 12px;
+            padding: 10px 0;
+        }
+
+        .containerforcards {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px;
+            align-items: stretch;
+        }
+
+        .news-card {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+        }
+
+        .news-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            padding: 4px 6px;
+        }
+
+        .news-content {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            padding: 9px;
+        }
+
+        .news-title {
+            margin: 0 0 8px;
+        }
+
+        .news-description {
+            margin: 0 0 10px;
+        }
+
+        .news-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .extra-news-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(260px, 0.9fr);
+            gap: 24px;
+            align-items: start;
+            padding: 0 16px 24px;
+        }
+
+        .extra-news {
+            min-width: 0;
+        }
+
+        .extra-news-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .extra-news-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+        }
+
+        .extra-news-item img {
+            display: block;
+            flex: 0 0 135px;
+            width: 135px;
+            height: 90px;
+            object-fit: cover;
+        }
+
+        .extra-news-item-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .extra-news-label {
+            display: inline-block;
+            padding: 4px 6px;
+            margin: 0 0 8px;
+        }
+
+        .extra-news-item h3 {
+            margin: 0 0 7px;
+        }
+
+        .extra-news-item p {
+            margin: 0 0 8px;
+        }
+
+        .extra-news-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .news-sidebar {
+            min-width: 0;
+        }
+
+        .mojo-card {
+            padding: 18px 14px;
+        }
+
+        .mojo-card h2 {
+            margin: 0 0 5px;
+        }
+
+        .mojo-card p {
+            margin: 0 0 14px;
+        }
+
+        .mojo-card a {
+            display: inline-block;
+            padding: 8px 10px;
+        }
+
+        .popular-card {
+            padding: 12px;
+        }
+
+        .popular-card h3 {
+            margin: 0 0 8px;
+        }
+
+        .popular-card ol {
+            padding: 0;
+            margin: 0;
+        }
+
+        .popular-card li {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 10px 0;
+        }
+
+        .popular-card li:last-child {
+            border-bottom: none;
+        }
+
+        .popular-card li::before {
+            content: counter(popular);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 32px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #174675;
+            color: white;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .popular-card a:hover,
+        .extra-news-item a:hover {
+            color: #a27b00;
+        }
+
+
+
+footer {
+    padding: 18px;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+    
+
+        /* SIGN-UP PAGE LAYOUT: BLOCKING AND POSITIONING */
+        .signup-main {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+            align-items: center;
+            gap: 45px;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 45px 28px;
+        }
+
+        .signup-intro { min-width: 0; }
+        .signup-form-wrap { min-width: 0; }
+        .signup-form { display: flex; flex-direction: column; gap: 14px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-field { display: flex; flex-direction: column; gap: 6px; }
+        .signup-options { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+
+</style>
+</head>
+
+<body style="font-family: Arial, sans-serif; background-color: #f8f8f4; color: #092448;">
+  <header style="background-color: #f8f8f4; border-bottom: 3px solid #e6c84b">
+        <input id="menu-toggle" type="checkbox" />
+        <label class="menu-btn" for="menu-toggle" style="font-size: 23px; color: #092448; cursor: pointer">☰</label>
+        <!-- SIDEBAR -->
+        <div class="sidebar" style="padding-top: 60px; background-color: #092448; transition: left 0.3s">
+            <label class="close-btn" for="menu-toggle" style="color: white; font-size: 30px; cursor: pointer">×</label>
+            <a href="index.html" style="color: white; text-decoration: none">Home</a>
+            <a href="News.html" style="color: white; text-decoration: none">News</a>
+            <a href="Opinyon.html" style="color: white; text-decoration: none">Opinyon</a>
+            <a href="Isports.html" style="color: white; text-decoration: none">iSports</a>
+            <a href="Lathalain.html" style="color: white; text-decoration: none">Lathalain</a>
+            <a href="Agham.html" style="color: white; text-decoration: none">Agham</a>
+            <a href="Multimedia.html" style="color: white; text-decoration: none">Multimedia</a>
+        </div>
+        <label class="overlay" for="menu-toggle" style="background: rgba(0, 0, 0, 0.4); cursor: pointer"></label>
+        <!-- LOGO -->
+        <div class="logo">
+            <img alt="Ang Gabay Online Student Publication" src="gabayLOGO.png" />
+        </div>
+        <!-- NAVIGATION -->
+        <nav>
+            <a href="index.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">HOME</a>
+            <a href="News.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">NEWS</a>
+            <a href="Opinyon.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">OPINYON</a>
+            <a href="Isports.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">ISPORTS</a>
+            <a href="Lathalain.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">LATHALAIN</a>
+            <a href="Agham.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">AGHAM</a>
+            <a class="active" href="Multimedia.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">MULTIMEDIA</a>
+        </nav>
+        <a aria-label="User" class="header-icon" href="signup.html"
+            style="color: #092448; font-size: 20px; text-decoration: none">♟ </a>
+    </header>
+
+    <!-- SIGN-UP PAGE -->
+    <main class="signup-main">
+
+        <!-- LEFT INTRODUCTION -->
+        <section class="signup-intro">
+            <p style="display: inline-block; background-color: #e6c84b; color: #092448; padding: 7px 12px; font-size: 11px; font-weight: bold; letter-spacing: 1px; margin: 0 0 18px;">
+                ANG GABAY ONLINE STUDENT PUBLICATION
+            </p>
+
+            <h1 style="font-family: Georgia, 'Times New Roman', serif; font-size: 48px; line-height: 1.08; margin: 0 0 18px; color: #092448;">
+                Be part of the<br><span style="color: #b18a00;">conversation.</span>
+            </h1>
+
+            <p style="font-size: 15px; line-height: 1.8; color: #4b6486; max-width: 460px; margin: 0 0 25px;">
+                Sumali sa komunidad ng ANG GABAY. Manatiling updated sa mga balita, opinyon, palakasan, lathalain, agham, at multimedia na nagbibigay-boses sa kabataan.
+            </p>
+
+            <div style="background-color: #e8edf2; border-left: 4px solid #e6c84b; padding: 18px 20px; max-width: 460px;">
+                <p style="font-family: Georgia, 'Times New Roman', serif; font-size: 18px; line-height: 1.5; font-style: italic; margin: 0 0 8px;">
+                    “Para sa Kabataan. Para sa Kinabukasan.”
+                </p>
+                <p style="font-size: 12px; color: #4b6486; margin: 0;">Maging bahagi ng mas mulat at mas makabuluhang komunidad.</p>
+            </div>
+
+            <p style="font-size: 12px; color: #6d7d8e; line-height: 1.6; margin-top: 25px;">
+                May account ka na? <a href="login.html" style="color: #174675; font-weight: bold; text-decoration: underline;">Mag-log in dito</a>
+            </p>
+        </section>
+
+        <!-- SIGN-UP FORM -->
+        <section class="signup-form-wrap" style="background-color: #ffffff; border: 1px solid #e0e4e7; border-top: 5px solid #e6c84b; padding: 30px; box-shadow: 0 12px 35px rgba(9,36,72,0.10);">
+            <div style="margin-bottom: 22px;">
+                <p style="font-size: 10px; letter-spacing: 2px; font-weight: bold; color: #a27b00; margin: 0 0 8px;">GUMAWA NG ACCOUNT</p>
+                <h2 style="font-family: Georgia, 'Times New Roman', serif; font-size: 30px; margin: 0 0 8px; color: #092448;">Sign up</h2>
+                <p style="font-size: 13px; color: #6b7785; margin: 0; line-height: 1.6;">Ilagay ang iyong impormasyon para makapagsimula.</p>
+            </div>
+
+            <form class="signup-form" action="#" method="post">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="first-name" style="font-size: 12px; font-weight: bold; color: #203957;">First name</label>
+                        <input id="first-name" name="first-name" type="text" placeholder="Juan" required style="width: 100%; padding: 12px; border: 1px solid #ccd5de; border-radius: 3px; font-size: 13px; background-color: #fbfcfd;">
+                    </div>
+                    <div class="form-field">
+                        <label for="last-name" style="font-size: 12px; font-weight: bold; color: #203957;">Last name</label>
+                        <input id="last-name" name="last-name" type="text" placeholder="Dela Cruz" required style="width: 100%; padding: 12px; border: 1px solid #ccd5de; border-radius: 3px; font-size: 13px; background-color: #fbfcfd;">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="email" style="font-size: 12px; font-weight: bold; color: #203957;">Email address</label>
+                    <input id="email" name="email" type="email" placeholder="you@example.com" required style="width: 100%; padding: 12px; border: 1px solid #ccd5de; border-radius: 3px; font-size: 13px; background-color: #fbfcfd;">
+                </div>
+
+                <div class="form-field">
+                    <label for="username" style="font-size: 12px; font-weight: bold; color: #203957;">Username</label>
+                    <input id="username" name="username" type="text" placeholder="Choose a username" required style="width: 100%; padding: 12px; border: 1px solid #ccd5de; border-radius: 3px; font-size: 13px; background-color: #fbfcfd;">
+                </div>
+
+                <div class="form-field">
+                    <label for="password" style="font-size: 12px; font-weight: bold; color: #203957;">Password</label>
+                    <input id="password" name="password" type="password" placeholder="Create a password" minlength="8" required style="width: 100%; padding: 12px; border: 1px solid #ccd5de; border-radius: 3px; font-size: 13px; background-color: #fbfcfd;">
+                    <span style="font-size: 10px; color: #7b8794;">Use at least 8 characters.</span>
+                </div>
+
+                <div class="signup-options">
+                    <label for="terms" style="display: flex; align-items: flex-start; gap: 8px; font-size: 11px; line-height: 1.5; color: #596a7a;">
+                        <input id="terms" name="terms" type="checkbox" required style="margin-top: 2px;">
+                        I agree to the terms and privacy policy.
+                    </label>
+                </div>
+
+                <button type="submit" style="width: 100%; padding: 13px; border: none; border-radius: 3px; background-color: #092448; color: #ffffff; font-size: 13px; font-weight: bold; letter-spacing: 1px; cursor: pointer;">
+                    CREATE ACCOUNT →
+                </button>
+
+                <p style="font-size: 10px; color: #8793a0; line-height: 1.5; text-align: center; margin: 0;">
+                    Demo sign-up form only. Kailangan ng backend para tunay na makagawa at makapag-save ng account.
+                </p>
+            </form>
+        </section>
+
+    </main>
+
+<footer style="background-color: #092448; color: white; border-top: 4px solid #e6c84b;">
+
+    <div class="footer-content">
+
+       
+        <div style="display: flex; align-items: center; gap: 8px;">
+            
+
+            <div>
+                <h2 style="font-family: Georgia, serif; font-size: 20px; margin: 0;">
+                    ANG GABAY
+                </h2>
+
+                <p style="font-size: 8px; letter-spacing: 2px; margin: 3px 0 0;">
+                    ONLINE STUDENT PUBLICATION
+                </p>
+            </div>
+        </div>
+
+       
+        <p style="font-family: Georgia, serif; font-size: 12px; font-style: italic; border-left: 1px solid #e6c84b; padding-left: 15px;">
+            Para sa Kabataan.<br>
+            Para sa Kinabukasan.
+        </p>
+
+       
+        <div class="footer-links">
+            <a href="#" aria-label="Facebook"
+               style="color: white; text-decoration: none;">f</a>
+
+            <a href="#" aria-label="Instagram"
+               style="color: white; text-decoration: none;">◎</a>
+
+            <a href="#" aria-label="YouTube"
+               style="color: white; text-decoration: none;">▶</a>
+
+            <a href="#" aria-label="X"
+               style="color: white; text-decoration: none;">𝕏</a>
+        </div>
+
+      
+        <div class="footer-links" style="font-size: 10px;">
+            <a href="News.html" style="color: white; text-decoration: none;">News</a>
+            <a href="Opinyon.html" style="color: white; text-decoration: none;">Opinion</a>
+            <a href="Isports.html" style="color: white; text-decoration: none;">Sports</a>
+            <a href="Lathalain.html" style="color: white; text-decoration: none;">Lathalain</a>
+            <a href="Agham.html" style="color: white; text-decoration: none;">Agham</a>
+            <a href="Multimedia.html" style="color: white; text-decoration: none;">Multimedia</a>
+        </div>
+
+    </div>
+
+   
+    <p style="border-top: 1px solid #375067; padding-top: 10px; margin: 15px 0 0; text-align: center; font-size: 9px; color: #c4d0d9;">
+        © 2026 ANG GABAY | Online Student Publication. All rights reserved.
+    </p>
+
+</footer>
+</body>
+</html>

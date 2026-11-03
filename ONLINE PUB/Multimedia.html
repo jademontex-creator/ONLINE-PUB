@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="fil">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANG GABAY | Multimedia</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f4;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 60px;
+            padding: 0 12px;
+            gap: 18px;
+            position: relative;
+            z-index: 5;
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        .menu-btn,
+        .header-icon {
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            display: block;
+            width: 220px;
+            height: auto;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 4px 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 8px 12px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex: 1;
+            height: 100%;
+            gap: 15px;
+        }
+
+        nav a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -260px;
+            width: 260px;
+            height: 100vh;
+            padding-top: 60px;
+            z-index: 10;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px 25px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        #menu-toggle:checked~.sidebar {
+            left: 0;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 8;
+        }
+
+        #menu-toggle:checked~.overlay {
+            display: block;
+        }
+
+        .banner {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            min-height: 235px;
+            overflow: hidden;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            width: 60%;
+            padding: 20px 0 20px 4%;
+        }
+
+        .banner h1 {
+            margin: 0 0 10px;
+        }
+
+        .description {
+            margin: 0 0 10px;
+        }
+
+        .quote {
+            position: absolute;
+            top: 35%;
+            right: 3%;
+            z-index: 1;
+            transform: rotate(-10deg);
+        }
+
+        .page-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(220px, 0.8fr);
+            gap: 25px;
+            align-items: start;
+            padding: 30px 5%;
+        }
+
+        .main-content {
+            min-width: 0;
+        }
+
+        .section-heading {
+            margin: 0 0 18px;
+            padding-bottom: 10px;
+        }
+
+        .podcast-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 12px;
+            align-items: stretch;
+        }
+
+        .podcast-cover {
+            min-height: 175px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .episode-content {
+            min-width: 0;
+        }
+
+        .video-layout {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .small-videos {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .infographic-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .gallery-item {
+            min-width: 0;
+        }
+
+        .gallery-item img,
+        .infographic-card img {
+            display: block;
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .mojo-aside {
+            min-width: 0;
+        }
+
+        .popular-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 0;
+        }
+
+        .popular-item img {
+            width: 75px;
+            height: 60px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header style="background-color: #f8f8f4; border-bottom: 3px solid #e6c84b">
+        <input id="menu-toggle" type="checkbox" />
+        <label class="menu-btn" for="menu-toggle" style="font-size: 23px; color: #092448; cursor: pointer">☰</label>
+        <!-- SIDEBAR -->
+        <div class="sidebar" style="padding-top: 60px; background-color: #092448; transition: left 0.3s">
+            <label class="close-btn" for="menu-toggle" style="color: white; font-size: 30px; cursor: pointer">×</label>
+            <a href="index.html" style="color: white; text-decoration: none">Home</a>
+            <a href="News.html" style="color: white; text-decoration: none">News</a>
+            <a href="Opinyon.html" style="color: white; text-decoration: none">Opinyon</a>
+            <a href="Isports.html" style="color: white; text-decoration: none">iSports</a>
+            <a href="Lathalain.html" style="color: white; text-decoration: none">Lathalain</a>
+            <a href="Agham.html" style="color: white; text-decoration: none">Agham</a>
+            <a href="Multimedia.html" style="color: white; text-decoration: none">Multimedia</a>
+        </div>
+        <label class="overlay" for="menu-toggle" style="background: rgba(0, 0, 0, 0.4); cursor: pointer"></label>
+        <!-- LOGO -->
+        <div class="logo">
+            <img alt="Ang Gabay Online Student Publication" src="gabayLOGO.png" />
+        </div>
+        <!-- NAVIGATION -->
+        <nav>
+            <a href="index.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">HOME</a>
+            <a href="News.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">NEWS</a>
+            <a href="Opinyon.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">OPINYON</a>
+            <a href="Isports.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">ISPORTS</a>
+            <a href="Lathalain.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">LATHALAIN</a>
+            <a href="Agham.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">AGHAM</a>
+            <a class="active" href="Multimedia.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">MULTIMEDIA</a>
+        </nav>
+        <a aria-label="User" class="header-icon" href="signup.html"
+            style="color: #092448; font-size: 20px; text-decoration: none">♟ </a>
+    </header>
+
+
+
+    <section class="banner" style="color: white; background-color: #0f2a4d; ">
+        <div class="content">
+            <span class="label"
+                style="background-color: #f5ca42; color: #172d4b; font-size: 60px; font-weight: bold; margin-bottom: 10px   ;">MULTIMEDIA</span>
+            <h1 style='font-size: 36px; line-height: 0.98; font-family: Georgia, "Times New Roman", serif'>
+
+            </h1>
+
+        </div>
+        <p class="quote"
+            style="color: #000000; font-size: 13px; font-style: italic; font-weight: bold; text-align: center">
+            Tinig<br />
+            ng Kabataan,<br />
+            Gabay sa<br />
+            Bawat Hakbang
+        </p>
+    </section>
+
+
+    <!-- MAIN CONTENT AND ASIDE -->
+    <div class="page-layout">
+
+        <main class="main-content">
+
+
+            <!-- PODCAST SECTION -->
+            <section id="podcast" style="margin-bottom: 35px;">
+
+                <h2 class="section-heading"
+                    style="font-family: Georgia, 'Times New Roman', serif; font-size: 25px; color: #092448; border-bottom: 2px solid #e6c84b;">
+                    Talakayan Podcast
+                </h2>
+
+                <div class="podcast-layout"
+                    style="background-color: #ffffff; padding: 15px; border: 1px solid #e2e2dc;">
+
+                    <!-- PODCAST COVER -->
+                    <div class="podcast-cover"
+                        style="background-color: #dce6ef; color: #092448; text-align: center; padding: 15px;">
+
+                        <span style="font-size: 38px;">🎙</span>
+
+                        <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 22px; margin: 8px 0;">
+                            TALAKAYAN
+                        </h3>
+
+                        <p style="font-size: 11px; margin: 0;">
+                           USAPANG DEPRESSION
+                        </p>
+
+                    </div>
+
+                    <!-- PODCAST DETAILS -->
+                    <div class="episode-content">
+
+                        <span style="font-size: 10px; font-weight: bold; color: #a27b00;">
+                            PINAKABAGONG EPISODE
+                        </span>
+
+                        <h3
+                            style="font-family: Georgia, 'Times New Roman', serif; color: #092448; font-size: 20px; margin: 8px 0;">
+                            Boses ng Kabataan
+                        </h3>
+
+                        <p style="font-size: 12px; color: #626b75; line-height: 1.6;">
+                            Samahan kami sa isang makabuluhang talakayan
+                            tungkol sa mga karanasan, pananaw, at hamon
+                            na kinakaharap ng kabataan sa kasalukuyan.
+                        </p>
+
+                        <p style="font-size: 11px; color: #777;">
+                            🎧 Podcast Episode 01
+                        </p>
+
+                        <!-- PALITAN ANG podcast.mp3 NG SARILI MONG AUDIO FILE -->
+                        <audio controls style="width: 100%;">
+                            <source src="PodcastNiJade.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- INFOGRAPHICS SECTION -->
+            <section id="infographics" style="margin-bottom: 35px;">
+
+                <h2 class="section-heading"
+                    style="font-family: Georgia, 'Times New Roman', serif; font-size: 25px; color: #092448; border-bottom: 2px solid #e6c84b;">
+                    Infographics
+                </h2>
+
+                <div class="infographic-grid">
+
+                    <!-- INFOGRAPHIC 1 -->
+                    <article class="infographic-card"
+                        style="background-color: #ffffff; border: 1px solid #e2e2dc; padding: 10px;">
+
+                        <!-- PALITAN ANG infographic1.jpg -->
+                        <img src="infographic1.jpg" alt="Infographic 1">
+
+                        <h3
+                            style="font-family: Georgia, 'Times New Roman', serif; font-size: 16px; color: #092448; margin-bottom: 5px;">
+                            Gabay sa Makabagong Kabataan
+                        </h3>
+
+                        <p style="font-size: 12px; color: #6b7280; line-height: 1.5;">
+                            Mahahalagang impormasyon at kaalamang
+                            makatutulong sa bawat mag-aaral.
+                        </p>
+
+                    </article>
+
+
+                    <!-- INFOGRAPHIC 2 -->
+                    <article class="infographic-card"
+                        style="background-color: #ffffff; border: 1px solid #e2e2dc; padding: 10px;">
+
+                        <!-- PALITAN ANG infographic2.jpg -->
+                        <img src="infographic2.jpg" alt="Infographic 2">
+
+                        <h3
+                            style="font-family: Georgia, 'Times New Roman', serif; font-size: 16px; color: #092448; margin-bottom: 5px;">
+                            Alamin at Unawain
+                        </h3>
+
+                        <p style="font-size: 12px; color: #6b7280; line-height: 1.5;">
+                            Mga datos at paliwanag tungkol sa mga
+                            isyung mahalaga sa ating lipunan.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- VIDEO SECTION -->
+            <section id="videos" style="margin-bottom: 35px;">
+
+                <h2 class="section-heading"
+                    style="font-family: Georgia, 'Times New Roman', serif; font-size: 25px; color: #092448; border-bottom: 2px solid #e6c84b;">
+                    Mga Bidyo
+                </h2>
+
+                <div class="video-layout">
+
+                    <!-- FEATURED VIDEO -->
+                    <article style="background-color: #ffffff; border: 1px solid #e2e2dc; padding: 12px;">
+
+                        <!-- PALITAN ANG video1.mp4 -->
+                        <video controls
+                            style="width: 100%; height: 240px; object-fit: contain; background-color: #092448;">
+                            <source
+                                src="YTDown.com_YouTube_Media_oTcoc09ZulU_Marcos-Jr-visits-Brigada-Eskwela-at-Victorino-Mapa-High-School-in-Manila-ABS-CBN_001_720p.mp4"
+                                type="video/mp4">
+                            Your browser does not support the video element.
+                        </video>
+
+                        <h3
+                            style="font-family: Georgia, 'Times New Roman', serif; font-size: 18px; color: #092448; margin-bottom: 5px;">
+                            Tampok na Bidyo
+                        </h3>
+
+                        <p style="font-size: 12px; color: #6b7280; line-height: 1.5;">
+                            Panoorin ang tampok na kuwento at mga
+                            pangyayaring nagbibigay-kaalaman sa kabataan.
+                        </p>
+
+                    </article>
+
+
+                    <!-- SMALL VIDEOS -->
+                    <div class="small-videos">
+
+                        <!-- VIDEO 2 -->
+                        <article style="background-color: #ffffff; border: 1px solid #e2e2dc; padding: 10px;">
+
+                            <!-- PALITAN ANG video2.mp4 -->
+                            <video controls
+                                style="width: 100%; height: 135px; object-fit: contain; background-color: #092448;">
+                                <source src="The V. Mapa High School Hymn..mp4" type="video/mp4">
+                                Your browser does not support the video element.
+                            </video>
+
+                            <h3
+                                style="font-family: Georgia, 'Times New Roman', serif; font-size: 14px; color: #092448; margin-bottom: 5px;">
+                                Kuwento ng Kabataan
+                            </h3>
+
+                            <p style="font-size: 11px; color: #6b7280; margin-bottom: 0;">
+                                Mga tinig at karanasan ng mag-aaral.
+                            </p>
+
+                        </article>
+
+
+                        <!-- VIDEO 3 -->
+                        <article style="background-color: #ffffff; border: 1px solid #e2e2dc; padding: 10px;">
+
+                            <!-- PALITAN ANG video3.mp4 -->
+                            <video controls
+                                style="width: 100%; height: 135px; object-fit: contain; background-color: #092448;">
+                                <source
+                                    src="YTDown.com_YouTube_Media_z4DO30P3ScQ_UH-Quiz-Bee-sa-V-Mapa-High-School-Unang-Hirit_001_1080p.mp4"
+                                    type="video/mp4">
+                                Your browser does not support the video element.
+                            </video>
+
+                            <h3
+                                style="font-family: Georgia, 'Times New Roman', serif; font-size: 14px; color: #092448; margin-bottom: 5px;">
+                                Sa Likod ng Kuwento
+                            </h3>
+
+                            <p style="font-size: 11px; color: #6b7280; margin-bottom: 0;">
+                                Mga kaganapan at likhang pampaaralan.
+                            </p>
+
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- GALLERY SECTION -->
+            <section id="gallery" style="margin-bottom: 35px;">
+
+                <h2 class="section-heading"
+                    style="font-family: Georgia, 'Times New Roman', serif; font-size: 25px; color: #092448; border-bottom: 2px solid #e6c84b;">
+                    Galeriya ng mga Kaganapan
+                </h2>
+
+                <div class="gallery-grid">
+
+                    <article class="gallery-item"
+                        style="background-color: #ffffff; border: 1px solid #e2e2dc; padding: 8px;">
+
+                        <!-- PALITAN ANG gallery1.jpg -->
+                        <img src="mmlower1.jpg" alt="Pangyayari sa paaralan">
+
+                        <p
+                            style="font-family: Georgia, 'Times New Roman', serif; font-size: 13px; color: #092448; margin-bottom: 4px;">
+                            Buhay-Paaralan
+                        </p>
+
+                    </article>
+
+
+                    <article class="gallery-item"
+                        style="background-color: #ffffff; border: 1px solid #e2e2dc; padding: 8px;">
+
+                        <!-- PALITAN ANG gallery2.jpg -->
+                        <img src="mmlower2.jpg" alt="Aktibidad ng mga mag-aaral">
+
+                        <p
+                            style="font-family: Georgia, 'Times New Roman', serif; font-size: 13px; color: #092448; margin-bottom: 4px;">
+                            Mga Aktibidad
+                        </p>
+
+                    </article>
+
+
+                    <article class="gallery-item"
+                        style="background-color: #ffffff; border: 1px solid #e2e2dc; padding: 8px;">
+
+                        <!-- PALITAN ANG gallery3.jpg -->
+                        <img src="mmlower3.jpg" alt="Mga kaganapan sa paaralan">
+
+                        <p
+                            style="font-family: Georgia, 'Times New Roman', serif; font-size: 13px; color: #092448; margin-bottom: 4px;">
+                            Mga Alaala
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+
+        <!-- RIGHT SIDEBAR / MOJO -->
+        <aside class="mojo-aside">
+
+            <!-- MOJO CARD -->
+            <div style="background-color: #092448; color: white; padding: 20px; text-align: center;">
+
+                <h2 style="font-family: Georgia, 'Times New Roman', serif; font-size: 28px; margin: 0 0 5px;">
+                    MOJO
+                </h2>
+
+                <p style="font-size: 12px; color: #e6c84b; margin-top: 0;">
+                    Mutya ng Kabataan
+                </p>
+
+                <p style="font-size: 12px; line-height: 1.6;">
+                    Isang espasyong nagbibigay-buhay sa talento,
+                    pagkamalikhain, at tinig ng kabataan.
+                </p>
+
+                <a href=""
+                    style="display: inline-block; background-color: #e6c84b; color: #092448; text-decoration: none; padding: 9px 12px; font-size: 11px; font-weight: bold;"
+                    target="_blank">
+                    Tuklasin ang MOJO →
+                </a>
+
+            </div>
+
+
+            <!-- PODCAST PLAYER -->
+            <div style="background-color: #ffffff; border: 1px solid #dedede; padding: 15px; margin-top: 20px;">
+
+                <h3
+                    style="font-family: Georgia, 'Times New Roman', serif; color: #092448; font-size: 18px; margin-top: 0; border-bottom: 2px solid #e6c84b; padding-bottom: 8px;">
+                    Pakinggan
+                </h3>
+
+                <p style="font-size: 12px; color: #555; line-height: 1.5;">
+                    Makinig sa mga kuwentong nagbibigay-kaalaman
+                    at inspirasyon sa bawat mag-aaral.
+                </p>
+
+                <!-- PALITAN ANG podcast.mp3 -->
+                <audio controls style="width: 100%;">
+                    <source src="PodcastNiJade.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+
+            </div>
+
+
+
+
+            <!-- SUBMISSION BANNER -->
+            <div
+                style="background-color: #e6c84b; color: #092448; padding: 18px; margin-top: 20px; text-align: center;">
+
+                <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 19px; margin-top: 0;">
+                    May Kuwento Ka?
+                </h3>
+
+                <p style="font-size: 12px; line-height: 1.5;">
+                    Ibahagi ang iyong talento, likha, at pananaw
+                    sa komunidad ng ANG GABAY.
+                </p>
+
+                <a href="signup.html"
+                    style="display: inline-block; background-color: #092448; color: white; text-decoration: none; padding: 9px 12px; font-size: 11px; font-weight: bold;">
+                    Makipag-ugnayan →
+                </a>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer style="background-color: #062b50; color: white; border-top: 3px solid #e6c84b; padding: 30px 5%;">
+
+        <div class="footer-content">
+
+            <!-- FOOTER LOGO -->
+            <div style="display: flex; align-items: center; gap: 15px;">
+
+                <img src="logoFooter.png" alt="ANG GABAY Logo" style="width: 125px; max-width: 100%; height: auto;">
+
+                <div style="border-left: 1px solid #d7e0e8; padding-left: 15px;">
+
+                    <p
+                        style="font-family: Georgia, 'Times New Roman', serif; font-size: 13px; font-style: italic; line-height: 1.5; margin: 0;">
+                        Para sa Kabataan.<br>
+                        Para sa Kinabukasan.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- SOCIAL LINKS -->
+            <div style="font-size: 14px;">
+
+                <p style="font-family: Georgia, 'Times New Roman', serif; font-size: 14px; margin-bottom: 10px;">
+                    Sundan kami
+                </p>
+
+                <div class="footer-links">
+
+                    <a href="#" aria-label="Facebook" style="color: white; text-decoration: none;">
+                        Facebook
+                    </a>
+
+                    <a href="#" aria-label="Instagram" style="color: white; text-decoration: none;">
+                        Instagram
+                    </a>
+
+                    <a href="#" aria-label="YouTube" style="color: white; text-decoration: none;">
+                        YouTube
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER NAVIGATION -->
+            <div>
+
+                <p style="font-family: Georgia, 'Times New Roman', serif; font-size: 14px; margin-bottom: 10px;">
+                    Mabilisang Link
+                </p>
+
+                <div class="footer-links" style="font-size: 11px;">
+
+                    <a href="index.html" style="color: white; text-decoration: none;">Home</a>
+                    <a href="News.html" style="color: white; text-decoration: none;">News</a>
+                    <a href="Opinyon.html" style="color: white; text-decoration: none;">Opinyon</a>
+                    <a href="Isports.html" style="color: white; text-decoration: none;">iSports</a>
+                    <a href="Lathalain.html" style="color: white; text-decoration: none;">Lathalain</a>
+                    <a href="Agham.html" style="color: white; text-decoration: none;">Agham</a>
+                    <a href="Multimedia.html" style="color: white; text-decoration: none;">Multimedia</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- COPYRIGHT -->
+        <p
+            style="color: #dbe3ec; font-size: 10px; text-align: center; border-top: 1px solid #49627b; padding-top: 15px; margin-top: 25px; margin-bottom: 0;">
+            © 2026 ANG GABAY Online Student Publication. Lahat ng karapatan ay nakalaan.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

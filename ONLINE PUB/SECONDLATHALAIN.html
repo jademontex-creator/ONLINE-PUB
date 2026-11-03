@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fil">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANG GABAY | Mga Salitang Mas Mabigat sa Timbang</title>
+
+    <style>
+        /* INTERNAL CSS: LAYOUT, BLOCKING, AT POSITIONING LANG */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+           header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 60px;
+            padding: 0 12px;
+            gap: 18px;
+            position: relative;
+            z-index: 5;
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        .menu-btn,
+        .header-icon {
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            display: block;
+            width: 220px;
+            height: auto;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 4px 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 8px 12px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex: 1;
+            height: 100%;
+            gap: 15px;
+        }
+
+        nav a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -260px;
+            width: 260px;
+            height: 100vh;
+            padding-top: 60px;
+            z-index: 10;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px 25px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        #menu-toggle:checked~.sidebar {
+            left: 0;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 8;
+        }
+
+        #menu-toggle:checked~.overlay {
+            display: block;
+        }
+
+
+        /* ARTICLE AT RIGHT ASIDE */
+        .page {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 272px;
+            align-items: start;
+            gap: 28px;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 22px 3.5% 28px;
+        }
+
+        main {
+            min-width: 0;
+        }
+
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            margin-bottom: 16px;
+        }
+
+        .byline-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 13px;
+            margin: 18px 0 20px;
+        }
+
+        .author-icon {
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            width: 29px;
+            height: 29px;
+            border-radius: 50%;
+        }
+
+        .separator {
+            height: 20px;
+        }
+
+        .share {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-left: auto;
+        }
+
+        .share a {
+            display: grid;
+            place-items: center;
+            width: 29px;
+            height: 29px;
+            border-radius: 50%;
+        }
+
+        .hero-photo {
+            margin: 0 0 24px;
+        }
+
+        .hero-photo img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1.86 / 1;
+            object-fit: cover;
+        }
+
+        .article-body {
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .article-body p {
+            margin: 0 0 16px;
+        }
+
+        .article-sidebar {
+            display: block;
+            position: static;
+            min-width: 0;
+            width: 100%;
+            padding-top: 16px;
+        }
+
+        .popular-item {
+            display: grid;
+            grid-template-columns: 28px 92px minmax(0, 1fr);
+            align-items: start;
+            gap: 7px;
+            padding: 13px 0;
+        }
+
+        .rank {
+            display: grid;
+            place-items: center;
+            width: 27px;
+            height: 27px;
+            border-radius: 50%;
+        }
+
+        .popular-item img {
+            display: block;
+            width: 92px;
+            height: 68px;
+            object-fit: cover;
+        }
+
+        .mojo-ad {
+            margin-top: 24px;
+        }
+
+        .mojo-ad img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 22px 4%;
+        }
+
+        .footer-logo {
+            display: block;
+            width: 245px;
+            max-width: 32%;
+            height: auto;
+        }
+
+        .footer-motto {
+            padding-left: 24px;
+        }
+
+        .socials {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+        }
+
+        .footer-links {
+            padding-left: 24px;
+        }
+
+        .copyright {
+            margin-left: 10px;
+        }
+
+
+    </style>
+</head>
+
+<body style="margin:0; background:#fbfcfa; color:#102d4e; font-family:Arial, Helvetica, sans-serif;">
+  <header style="background-color: #f8f8f4; border-bottom: 3px solid #e6c84b">
+        <input id="menu-toggle" type="checkbox" />
+        <label class="menu-btn" for="menu-toggle" style="font-size: 23px; color: #092448; cursor: pointer">☰</label>
+        <!-- SIDEBAR -->
+        <div class="sidebar" style="padding-top: 60px; background-color: #092448; transition: left 0.3s">
+            <label class="close-btn" for="menu-toggle" style="color: white; font-size: 30px; cursor: pointer">×</label>
+            <a href="index.html" style="color: white; text-decoration: none">Home</a>
+            <a href="News.html" style="color: white; text-decoration: none">News</a>
+            <a href="Opinyon.html" style="color: white; text-decoration: none">Opinyon</a>
+            <a href="Isports.html" style="color: white; text-decoration: none">iSports</a>
+            <a href="Lathalain.html" style="color: white; text-decoration: none">Lathalain</a>
+            <a href="Agham.html" style="color: white; text-decoration: none">Agham</a>
+            <a href="Multimedia.html" style="color: white; text-decoration: none">Multimedia</a>
+        </div>
+        <label class="overlay" for="menu-toggle" style="background: rgba(0, 0, 0, 0.4); cursor: pointer"></label>
+        <!-- LOGO -->
+        <div class="logo">
+            <img alt="Ang Gabay Online Student Publication" src="gabayLOGO.png" />
+        </div>
+        <!-- NAVIGATION -->
+        <nav>
+            <a href="index.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">HOME</a>
+            <a href="News.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">NEWS</a>
+            <a href="Opinyon.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">OPINYON</a>
+            <a href="Isports.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">ISPORTS</a>
+            <a href="Lathalain.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">LATHALAIN</a>
+            <a href="Agham.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">AGHAM</a>
+            <a class="active" href="Multimedia.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">MULTIMEDIA</a>
+        </nav>
+        <a aria-label="User" class="header-icon" href="signup.html"
+            style="color: #092448; font-size: 20px; text-decoration: none">♟ </a>
+    </header>
+
+    <!-- PAGE GRID -->
+    <div class="page">
+
+        <!-- MAIN ARTICLE -->
+        <main>
+            <div class="breadcrumbs" style="font-size:12px; font-weight:bold;">
+                <a href="index.html"
+                    style="color:#092849; text-decoration:none; font-size:18px;">⌂</a>
+                <span>/</span>
+                <span>LATHALAIN</span>
+                <span>/</span>
+                <span>KALUSUGAN AT LIPUNAN</span>
+            </div>
+
+            <article>
+                <h1 style="margin:0 0 8px; color:#092849; font-family:Georgia, 'Times New Roman', serif; font-size:clamp(34px, 4.2vw, 52px); line-height:1.02; letter-spacing:-.7px;">
+                    Mga Salitang Mas Mabigat sa Timbang
+                </h1>
+
+                <p style="max-width:850px; margin:12px 0 18px; color:#263d53; font-family:Georgia, 'Times New Roman', serif; font-size:18px; line-height:1.45;">
+                    Hindi simpleng biro ang body shaming. Sa likod ng mga puna sa katawan ay maaaring nakatago ang hiya, pagkawala ng tiwala sa sarili, at mga salitang matagal bago tuluyang makalimutan.
+                </p>
+
+                <div class="byline-row" style="color:#405268; font-size:12px;">
+                    <span class="author-icon" style="background:#0a2c4f; color:white; font-size:18px;">♟</span>
+                    <span>Ni <strong>ARIELLE ANNE APAG</strong></span>
+                    <span class="separator" style="border-left:1px solid #aab4bd;"></span>
+                    <span>Lathalain</span>
+                    <span class="separator" style="border-left:1px solid #aab4bd;"></span>
+                    <span>◷ 5 min read</span>
+
+                    <div class="share">
+                        <span>Ibahagi:</span>
+                        <a href="#" aria-label="Facebook"
+                            style="background:#092849; color:white; font-weight:bold; text-decoration:none;">f</a>
+                        <a href="#" aria-label="X"
+                            style="background:#092849; color:white; font-weight:bold; text-decoration:none;">𝕏</a>
+                        <a href="#" aria-label="Copy link"
+                            style="background:#092849; color:white; font-weight:bold; text-decoration:none;">↗</a>
+                    </div>
+                </div>
+
+                <figure class="hero-photo">
+                    <img src="forLAT2.webp" alt="Larawang pang-ilustrasyon tungkol sa body shaming at pagtanggap sa sarili">
+                    <figcaption style="color:#5c6b7a; font-size:11px; line-height:1.45;">
+                        Ang mga puna tungkol sa katawan ay maaaring mag-iwan ng sugat na hindi agad nakikita. | Larawang pang-ilustrasyon
+                    </figcaption>
+                </figure>
+
+                <div class="article-body" style="color:#243d54;">
+
+                    <p>
+                        “Pangit ba ako?” Iyan ang tanong na madalas bumabagabag sa isip ng taong laging pinupuna ang sariling katawan. Sa body shaming, hindi agad nakikita ang sugat. Nagsisimula ito sa biro na akala ng iba ay wala lang, sa komentong pahaging, o sa tinging parang may mali sa isang tao kahit wala naman.
+                    </p>
+
+                    <p>
+                        Hindi lang katawan ang kaharap ng tao sa salamin. Nariyan din ang takot na mapuna, ang bigat ng tingin ng iba, at ang unti-unting pagguho ng tiwala sa sarili kapag ang anyo ang ginagawang batayan ng lahat.
+                    </p>
+
+                    <h2 style="margin:28px 0 12px; color:#092849; font-family:Georgia, 'Times New Roman', serif; font-size:25px;">
+                        Lilim ng Paghusga
+                    </h2>
+
+                    <p>
+                        Timbang, kulay, hugis, at anyo ng katawan ang madalas unang napapansin sa lipunang sanay humusga sa itsura. Ngunit hindi nararapat gawing tuntungan ng paghatol ang katawan ng tao. Kapag panlabas ang nauunang pinapansin, nalulusaw ang puwang para sa pag-unawa at napapalitan ito ng pagdududa sa halip na paggalang.
+                    </p>
+
+                    <p>
+                        Doon nagsisimula ang mas malalim na pinsala. Ang paulit-ulit na pagtingin na parang may mali sa isang tao ay hindi basta puna lamang. Nauuwi ito sa pagguho ng loob, sa pag-urong ng kumpiyansa, at sa pagdadalawang-isip sa sariling anyo. Iyan ang bigat ng body shaming—sugatang hindi panlabas lamang, kundi tumatama hanggang sa pagtingin ng tao sa sarili niya.
+                    </p>
+
+                    <p>
+                        Hindi rin laging hayagan ang panlalait. Minsan, nakasuot ito sa tinging mabilis humatol, sa komentong kunwari’y walang saysay, o sa salitang basta na lamang binibitawan kahit may puwedeng masugatan. Sa paglipas ng panahon, ang ganitong pagtingin ay nagiging normal sa paningin ng marami, kahit may dignidad nang nasasagasaan.
+                    </p>
+
+                    <h2 style="margin:28px 0 12px; color:#092849; font-family:Georgia, 'Times New Roman', serif; font-size:25px;">
+                        Bigat ng Pangmamaliit
+                    </h2>
+
+                    <p>
+                        Maraming pagkakataon, nagsisimula ang pangmamaliit sa katawan sa bahay, silid-aralan, o simpleng usapan sa barkada. Ang isang puna sa timbang o hugis ng katawan ay puwedeng dumiretso sa hiya, at ang hiya ay puwedeng mauwi sa tahimik na paglayo sa mga taong nakapaligid. Hindi ang mismong sinabi ang pinakamahirap bitawan, kundi ang pakiramdam na kailangan mo pa itong ngitian.
+                    </p>
+
+                    <p>
+                        Iba’t ibang pag-aaral tungkol sa pagtingin sa katawan at pangmamaliit sa anyo ang nagpapakitang may kaugnayan ang ganitong karanasan sa mababang tiwala sa sarili, pag-iwas sa pakikisalamuha, at mas mabigat na epekto sa kalusugang pangkaisipan. Ibig sabihin, hindi ito simpleng usapin ng panlabas na anyo; may kasunod itong pinsalang tumatama sa pag-iisip at damdamin.
+                    </p>
+
+                    <p>
+                        Lalong dumarami ang ganitong panlalait sa tahanan, paaralan, at social media dahil mabilis itong kumalat at maulit, hanggang sa mapawi ang bigat ng salitang dati’y ipinapasa bilang biro. Kapag paulit-ulit itong nangyayari, ang katawan ang nagiging sentro ng puna, kahit hindi naman ito dapat ang batayan ng pagtingin sa isang tao.
+                    </p>
+
+                    <h2 style="margin:28px 0 12px; color:#092849; font-family:Georgia, 'Times New Roman', serif; font-size:25px;">
+                        Pag-angkin ng Sarili
+                    </h2>
+
+                    <p>
+                        May mga taong napipilitang manahimik upang umiwas sa panlalait. Subalit hindi laging kahinaan ang katahimikan. Sa gitna ng pangmamaliit sa anyo, marami ang natututong tumindig, tanggapin ang sarili, at hindi magpakulong sa tingin ng iba.
+                    </p>
+
+                    <p>
+                        Hindi madali ang pag-angkin sa sarili sa mundong mapanuri. Ngunit sa bawat hakbang palayo sa kahihiyan, may hakbang din palapit sa pagtanggap. Ang tunay na tapang ay ang tahimik na pagtangging magpaliit para lamang sumunod sa pamantayang hindi naman nararapat maging batayan.
+                    </p>
+
+                    <h2 style="margin:28px 0 12px; color:#092849; font-family:Georgia, 'Times New Roman', serif; font-size:25px;">
+                        Dangal na Hindi Nasusukat
+                    </h2>
+
+                    <p>
+                        Hindi katawan ang sukatan ng tao. Mas mabigat ang panghuhusga kaysa sa anyong madaling pintasan, at ang pinsalang dala nito ay hindi agad nawawala. Ang tunay na dangal ay nasa pagpiling tumindig kahit ilang ulit ka nang sinubukang paliitin.
+                    </p>
+
+                    <p>
+                        Kung may salaming dapat basagin, iyon ang salamin ng lipunan. Sa sobrang sanay nitong tumingin sa panlabas, nalilimutan nitong unahin ang pagkatao. Kaya ang tunay na pagbangon ay hindi nagsisimula sa pagbabago ng katawan, kundi sa pag-amin na ang halaga ng tao ay hindi kailanman nasusukat sa hugis lamang.
+                    </p>
+
+                </div>
+            </article>
+        </main>
+
+      <aside class="article-sidebar">
+
+            <h2 style="margin:0 0 7px; padding:14px 12px; background:#f1f5f7; border-left:5px solid #f0cf36; color:#102d4e; font-family:Georgia, 'Times New Roman', serif; font-size:23px; text-transform:uppercase;">
+                Pinakabasa
+            </h2>
+
+            <a class="popular-item" href="THIRDNEWS.html"
+                style="color:#102d4e; text-decoration:none; border-bottom:1px solid #dfe4e8;">
+                <span class="rank" style="background:#092849; color:white; font-family:Georgia, serif; font-size:15px; font-weight:bold;">1</span>
+                <img src="forNews3.jpg" alt="Balita tungkol sa palakasan">
+                <div>
+                    <h3 style="margin:0 0 7px; color:#102d4e; font-family:Georgia, 'Times New Roman', serif; font-size:13px; line-height:1.28;">
+                        PNP, Kinasuhan ang 15-anyos sa Tacloban Shooting
+                    </h3>
+                    <p style="margin:0; color:#657383; font-size:10px; line-height:1.4;">
+                        Oktubre 15, 2026 · 6 min read
+                    </p>
+                </div>
+            </a>
+
+            <a class="popular-item" href="SECONDOPINYON.html"
+                style="color:#102d4e; text-decoration:none; border-bottom:1px solid #dfe4e8;">
+                <span class="rank" style="background:#092849; color:white; font-family:Georgia, serif; font-size:15px; font-weight:bold;">2</span>
+                <img src="forOP2.jpg" alt="Larawan para sa balitang pangkalikasan">
+                <div>
+                    <h3 style="margin:0 0 7px; color:#102d4e; font-family:Georgia, 'Times New Roman', serif; font-size:13px; line-height:1.28;">
+                       Parehong Pangalan, Parehong Sistema
+                    </h3>
+                    <p style="margin:0; color:#657383; font-size:10px; line-height:1.4;">
+                        Oktubre 14, 2026 · 5 min read
+                    </p>
+                </div>
+            </a>
+
+            <a class="popular-item" href="FIFTH AGHAM.html"
+                style="color:#102d4e; text-decoration:none; border-bottom:1px solid #dfe4e8;">
+                <span class="rank" style="background:#092849; color:white; font-family:Georgia, serif; font-size:15px; font-weight:bold;">3</span>
+                <img src="forAgham5.jpg" alt="Mga gamot at produktong pangkalusugan">
+                <div>
+                    <h3 style="margin:0 0 7px; color:#102d4e; font-family:Georgia, 'Times New Roman', serif; font-size:13px; line-height:1.28;">
+                        Lunas o Lason?
+                    </h3>
+                    <p style="margin:0; color:#657383; font-size:10px; line-height:1.4;">
+                        AGHAM EDITORIAL · 3 min read
+                    </p>
+                </div>
+            </a>
+
+            <a class="popular-item" href="SECONDLATHALAIN.html"
+                style="color:#102d4e; text-decoration:none; border-bottom:1px solid #dfe4e8;">
+                <span class="rank" style="background:#092849; color:white; font-family:Georgia, serif; font-size:15px; font-weight:bold;">4</span>
+                <img src="forLAT2.webp" alt="Body Shaming editoryal">
+                <div>
+                    <h3 style="margin:0 0 7px; color:#102d4e; font-family:Georgia, 'Times New Roman', serif; font-size:13px; line-height:1.28;">
+                        Mga salitang mas mabigat pa sa timbang.
+                    </h3>
+                    <p style="margin:0; color:#657383; font-size:10px; line-height:1.4;">
+                        Oktubre 10, 2026 · 3 min read
+                    </p>
+                </div>
+            </a>
+
+            <a class="popular-item" href="FOURTHSPORTS.html"
+                style="color:#102d4e; text-decoration:none; border-bottom:1px solid #dfe4e8;">
+                <span class="rank" style="background:#092849; color:white; font-family:Georgia, serif; font-size:15px; font-weight:bold;">5</span>
+                <img src="forSports4.avif" alt="Bata na tired">
+                <div>
+                    <h3 style="margin:0 0 7px; color:#102d4e; font-family:Georgia, 'Times New Roman', serif; font-size:13px; line-height:1.28;">
+                       Medalya o Marka: Ang Dobleng Laban ng Atleta
+                    </h3>
+                    <p style="margin:0; color:#657383; font-size:10px; line-height:1.4;">
+                        Oktubre 9, 2026 · 4 min read
+                    </p>
+                </div>
+            </a>
+
+            <!-- MOJO BANNER -->
+            <div class="mojo-ad">
+                <img src="bannerGilid.png" alt="MOJO: Mutya ng Kabataan">
+            </div>
+
+        </aside>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer"
+        style="background:#062b50; color:white; border-top:1px solid #e7c735;">
+
+        <img class="footer-logo" src="logoFooter.png"
+            alt="ANG GABAY Online Student Publication">
+
+        <div class="footer-motto"
+            style="border-left:1px solid #d7e0e8; font-family:Georgia, serif; font-size:13px; font-style:italic; line-height:1.5;">
+            Para sa Kabataan.<br>
+            Para sa Kinabukasan.
+        </div>
+
+        <div class="socials" style="font-size:15px;">
+            <a href="#" aria-label="Facebook" style="color:white; text-decoration:none;">●</a>
+            <a href="#" aria-label="Instagram" style="color:white; text-decoration:none;">◎</a>
+            <a href="#" aria-label="YouTube" style="color:white; text-decoration:none;">▶</a>
+            <a href="#" aria-label="X" style="color:white; text-decoration:none;">𝕏</a>
+        </div>
+
+        <div class="footer-links"
+            style="border-left:1px solid #d7e0e8; font-size:11px;">
+            News | Opinyon | Isports | Lathalain | Agham | Multimedia
+        </div>
+
+        <div class="copyright" style="color:#dbe3ec; font-size:9px;">
+            © 2026 Ang Gabay. Lahat ng karapatan ay nakalaan.
+        </div>
+
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html lang="fil">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ANG GABAY</title>
+    <style>
+        /* INTERNAL CSS: Layout, positioning, at block arrangement */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 60px;
+            padding: 0 12px;
+            gap: 18px;
+            position: relative;
+            z-index: 5;
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        .menu-btn,
+        .header-icon {
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            display: block;
+            width: 220px;
+            height: auto;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 4px 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 8px 12px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex: 1;
+            height: 100%;
+            gap: 15px;
+        }
+
+        nav a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -260px;
+            width: 260px;
+            height: 100vh;
+            padding-top: 60px;
+            z-index: 10;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px 25px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        #menu-toggle:checked~.sidebar {
+            left: 0;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 8;
+        }
+
+        #menu-toggle:checked~.overlay {
+            display: block;
+        }
+
+        .banner {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            min-height: 235px;
+            overflow: hidden;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            width: 60%;
+            padding: 20px 0 20px 4%;
+        }
+
+        .banner h1 {
+            margin: 0 0 10px;
+        }
+
+        .description {
+            margin: 0 0 10px;
+        }
+
+        .quote {
+            position: absolute;
+            top: 35%;
+            right: 3%;
+            z-index: 1;
+            transform: rotate(-10deg);
+        }
+
+        .page-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 180px;
+            align-items: start;
+            gap: 18px;
+            padding: 16px;
+        }
+
+        .main-news,
+        .mojo-aside {
+            min-width: 0;
+        }
+
+        .mojo-aside {
+            width: 100%;
+        }
+
+        .mojo-aside img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .PATOK {
+            margin: 0 0 12px;
+            padding: 10px 0;
+        }
+
+        .containerforcards {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            align-items: stretch;
+            gap: 10px;
+        }
+
+        .news-card {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+        }
+
+        .news-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+        }
+
+        .news-content {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            padding: 9px;
+        }
+
+        .news-title {
+            margin: 0 0 8px;
+        }
+
+        .news-description {
+            margin: 0 0 10px;
+        }
+
+        .news-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            margin-top: auto;
+            padding-top: 8px;
+        }
+
+      
+        footer {
+    padding: 18px;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+    </style>
+</head>
+
+<body style="font-family: Arial, sans-serif; background-color: #f8f8f4">
+    <!-- HEADER -->
+    <header style="background-color: #f8f8f4; border-bottom: 3px solid #e6c84b">
+        <input id="menu-toggle" type="checkbox" />
+        <label class="menu-btn" for="menu-toggle" style="font-size: 23px; color: #092448; cursor: pointer">☰</label>
+        <!-- SIDEBAR -->
+        <div class="sidebar" style="padding-top: 60px; background-color: #092448; transition: left 0.3s">
+            <label class="close-btn" for="menu-toggle" style="color: white; font-size: 30px; cursor: pointer">×</label>
+            <a href="index.html" style="color: white; text-decoration: none">Home</a>
+            <a href="News.html" style="color: white; text-decoration: none">News</a>
+            <a href="Opinyon.html" style="color: white; text-decoration: none">Opinyon</a>
+            <a href="Isports.html" style="color: white; text-decoration: none">iSports</a>
+            <a href="Lathalain.html" style="color: white; text-decoration: none">Lathalain</a>
+            <a href="Agham.html" style="color: white; text-decoration: none">Agham</a>
+            <a href="Multimedia.html" style="color: white; text-decoration: none">Multimedia</a>
+        </div>
+        <label class="overlay" for="menu-toggle" style="background: rgba(0, 0, 0, 0.4); cursor: pointer"></label>
+        <!-- LOGO -->
+        <div class="logo">
+            <img alt="Ang Gabay Online Student Publication" src="gabayLOGO.png" />
+        </div>
+        <!-- NAVIGATION -->
+        <nav>
+            <a href="index.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">HOME</a>
+            <a href="News.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">NEWS</a>
+            <a href="Opinyon.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">OPINYON</a>
+            <a href="Isports.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">ISPORTS</a>
+            <a href="Lathalain.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">LATHALAIN</a>
+            <a href="Agham.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">AGHAM</a>
+            <a class="active" href="Multimedia.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">MULTIMEDIA</a>
+        </nav>
+        <a aria-label="User" class="header-icon" href="signup.html"
+            style="color: #092448; font-size: 20px; text-decoration: none">♟ </a>
+    </header>
+    <!-- MAIN BANNER -->
+    <section class="banner" style="color: white; background-color: #092448;">
+        <div class="content">
+            <span class="label"
+                style="background-color: #f5ca42; color: #172d4b; font-size: 20px; font-weight: bold; margin-bottom: 10px   ;">BALITA</span>
+            <h1 style='font-size: 36px; line-height: 0.98; font-family: Georgia, "Times New Roman", serif'>
+              PNP, Kinasuhan ang <br>15-anyos sa
+                            Tacloban <br>Shooting
+            </h1>
+            <p class="description" style="font-size: 11px; line-height: 1.4">
+                Naghain na ng reklamo ang Philippine National Police (PNP) laban sa 15 taong <br>gulang na suspek sa trahedyang pamamaril sa isang paaralan sa Tacloban City <br>noong Hunyo 22.
+            </p>
+            <a class="button" href="THIRDNEWS.html"
+                style="background-color: #f5ca42; color: #172d4b; text-decoration: none; font-size: 10px; font-weight: bold; border-radius: 5px;">
+                Basahin ang buong balita →
+            </a>
+        </div>
+        <p class="quote"
+            style="color: #172d4b; font-size: 13px; font-style: italic; font-weight: bold; text-align: center">
+            Tinig<br />
+            ng Kabataan,<br />
+            Gabay sa<br />
+            Bawat Hakbang
+        </p>
+    </section>
+    <!-- MAIN NEWS AREA -->
+    <div class="page-layout">
+        <main class="main-news">
+            <h2 class="PATOK"
+                style='border-bottom: 2px solid #e6c84b; color: #092448; font-family: Georgia, "Times New Roman", serif; text-transform: uppercase'>
+                Patok na Balita</h2>
+            <div class="containerforcards">
+
+                <article class="news-card"
+                    style="background-color: #fff; border: 1px solid #e2dfd5; border-radius: 4px; box-shadow: 0 2px 7px #00000012">
+                    <div class="image-container">
+                        <img alt="News1" class="news-image" src="forNews1.jpg" />
+                        <span class="category"
+                            style="background-color: #ffdf4f; color: #092448; font-size: 9px; font-weight: bold; border-radius: 2px; padding: 2px;">BALITA</span>
+                    </div>
+                    <div class="news-content">
+                        <h2 class="news-title"
+                            style='color: #203957; font-family: Georgia, "Times New Roman", serif; font-size: 13px; line-height: 1.2'>
+                            Mga Mag-aaral sa PNHS: Hinarap
+                            ang Isyu ng Sexual Harassment.</h2>
+                        <p class="news-description" style="color: #777; font-size: 10px; line-height: 1.4">Batay sa ulat
+                            ng GMA News, nag-organisa ng protesta ang mga mag-aaral sa Parañaque
+                            National High School (PNHS) noong Hunyo 22, 2026.</p>
+                            <a href="FIRSTNEWS.html" style="color: #174675; font-size: 11px; font-weight: bold">Basahin pa →</a>
+                        <div class="news-footer"
+                            style="border-top: 1px solid #eee; color: #888; font-family: Arial, sans-serif; font-size: 9px">
+                            <span>▦ Hunyo 22, 2026</span>
+                            <span>◷ 5 min read</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="news-card"
+                    style="background-color: #fff; border: 1px solid #e2dfd5; border-radius: 4px; box-shadow: 0 2px 7px #00000012">
+                    <div class="image-container">
+                        <img alt="News 2" class="news-image" src="forNews2.jpg" />
+                        <span class="category"
+                            style="background-color: #ffdf4f; color: #092448; font-size: 9px; font-weight: bold; border-radius: 2px; padding: 2px;">BALITA</span>
+                    </div>
+                    <div class="news-content">
+                        <h2 class="news-title"
+                            style='color: #203957; font-family: Georgia, "Times New Roman", serif; font-size: 13px; line-height: 1.2'>
+                            UNICEF, Nagbabala sa Lumalalang
+                            Pagsasamantala sa mga Bata
+                            Online</h2>
+                        <p class="news-description" style="color: #777; font-size: 10px; line-height: 1.4">Nagbabala ang
+                            UNICEF noong Pebrero 4, 2026, sa pagdami ng AI-generated sexualized images ng mga bata at
+                            nanawagan ng agarang aksyon.</p>
+                            <a href="SECONDNEWS.html" style="color: #174675; font-size: 11px; font-weight: bold">Basahin pa →</a>
+                        <div class="news-footer"
+                            style="border-top: 1px solid #eee; color: #888; font-family: Arial, sans-serif; font-size: 9px">
+                            <span>▦ Okt 22, 2026</span>
+                            <span>◷ 3 min read</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="news-card"
+                    style="background-color: #fff; border: 1px solid #e2dfd5; border-radius: 4px; box-shadow: 0 2px 7px #00000012">
+                    <div class="image-container">
+                        <img alt="News 3" class="news-image" src="forNews3.jpg" />
+                        <span class="category"
+                            style="background-color: #ffdf4f; color: #092448; font-size: 9px; font-weight: bold; border-radius: 2px; padding: 2px;">BALITA</span>
+                    </div>
+                    <div class="news-content">
+                        <h2 class="news-title"
+                            style='color: #203957; font-family: Georgia, "Times New Roman", serif; font-size: 13px; line-height: 1.2'>
+                            PNP, Kinasuhan ang 15-anyos sa
+                            Tacloban Shooting</h2>
+                        <p class="news-description" style="color: #777; font-size: 10px; line-height: 1.4">Naghain na ng
+                            reklamo ang Philippine National Police (PNP) laban sa 15 taong gulang na
+                            suspek sa trahedyang pamamaril sa isang paaralan sa Tacloban City noong Hunyo 22.</p>
+                        <a href="THIRDNEWS.html" style="color: #174675; font-size: 11px; font-weight: bold">Basahin pa →</a>
+                            <div class="news-footer"
+                            style="border-top: 1px solid #eee; color: #888; font-family: Arial, sans-serif; font-size: 9px">
+                            <span>▦ Okt 22, 2026</span>
+                            <span>◷ 3 min read</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="news-card"
+                    style="background-color: #fff; border: 1px solid #e2dfd5; border-radius: 4px; box-shadow: 0 2px 7px #00000012">
+                    <div class="image-container">
+                        <img alt="News 4" class="news-image" src="forNews4.jpg" />
+                        <span class="category"
+                            style="background-color: #ffdf4f; color: #092448; font-size: 9px; font-weight: bold; border-radius: 2px; padding: 2px;">BALITA</span>
+                    </div>
+                    <div class="news-content">
+                        <h2 class="news-title"
+                            style='color: #203957; font-family: Georgia, "Times New Roman", serif; font-size: 13px; line-height: 1.2'>
+                            Suporta ng Maritime Council:
+                            paggiit ng DFA kontra China.</h2>
+                        <p class="news-description" style="color: #777; font-size: 10px; line-height: 1.4">ika-10
+                            anibersaryo sa susunod na buwan.
+                            Buong suporta ang NMC sa paninindigan ng DFA sa tagumpay ng Pilipinas sa arbitral ruling sa
+                            South China Sea habang papalapit ang ika-10 anibersaryo nito.</p>
+                            <a href="FOURTHNEWS.html" style="color: #174675; font-size: 11px; font-weight: bold">Basahin pa →</a>
+                        <div class="news-footer"
+                            style="border-top: 1px solid #eee; color: #888; font-family: Arial, sans-serif; font-size: 9px">
+                            <span>▦ Okt 22, 2026</span>
+                            <span>◷ 4 min read</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="news-card"
+                    style="background-color: #fff; border: 1px solid #e2dfd5; border-radius: 4px; box-shadow: 0 2px 7px #00000012">
+                    <div class="image-container">
+                        <img alt="News 5" class="news-image" src="forNews5.jpg" />
+                        <span class="category"
+                            style="background-color: #ffdf4f; color: #092448; font-size: 9px; font-weight: bold; border-radius: 2px; padding: 2px;">BALITA</span>
+                    </div>
+                    <div class="news-content">
+                        <h2 class="news-title"
+                            style='color: #203957; font-family: Georgia, "Times New Roman", serif; font-size: 13px; line-height: 1.2'>
+                            Karahasan sa Paaralan, Umani ng
+                            Pag-aalala</h2>
+                        <p class="news-description" style="color: #777; font-size: 10px; line-height: 1.4">Nagsimula ang mga awtoridad na mag-imbestiga matapos ang insidente ng karahasan sa loob
+ng mataas na paaralan sa Tacloban City. Nilalayon ng imbestigasyon na matukoy.</p>
+                        <a href="FIFTHNEWS.html" style="color: #174675; font-size: 11px; font-weight: bold">Basahin pa →</a>
+<div class="news-footer"
+                            style="border-top: 1px solid #eee; color: #888; font-family: Arial, sans-serif; font-size: 9px">
+                            <span>▦ Okt 22, 2026</span>
+                            <span>◷ 4 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </main>
+        <aside class="mojo-aside">
+            <img alt="MOJO: Tinig ng Kabataan" src="bannerGilid.png" />
+        </aside>
+    </div>
+    <footer style="background-color: #092448; color: white; border-top: 4px solid #e6c84b;">
+
+        <div class="footer-content">
+
+            <div>
+                <h2 style="font-family: Georgia, serif; margin: 0; font-size: 20px;">
+                    ANG GABAY
+                </h2>
+
+                <p style="font-size: 8px; letter-spacing: 2px; margin-top: 3px;">
+                    ONLINE STUDENT PUBLICATION
+                </p>
+            </div>
+
+            <p style="font-family: Georgia, serif; font-size: 12px; font-style: italic;">
+                Para sa Kabataan.<br>
+                Para sa Kinabukasan.
+            </p>
+
+            <div class="footer-links">
+                <a href="News.html" style="color: white; text-decoration: none;">News</a>
+                <a href="Opinyon.html" style="color: white; text-decoration: none;">Opinion</a>
+                <a href="Isports.html" style="color: white; text-decoration: none;">Sports</a>
+                <a href="Lathalain.html" style="color: white; text-decoration: none;">Lathalain</a>
+                <a href="Agham.html" style="color: white; text-decoration: none;">Agham</a>
+                <a href="Multimedia.html" style="color: white; text-decoration: none;">Multimedia</a>
+            </div>
+
+        </div>
+
+        <p style="border-top: 1px solid #375067; padding-top: 10px; margin-bottom: 0; text-align: center; font-size: 9px;">
+            © 2026 Ang Gabay Online Student Publication. All rights reserved.
+        </p>
+
+    </footer>
+</body>
+
+</html>

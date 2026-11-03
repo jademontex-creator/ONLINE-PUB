@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fil">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANG GABAY | Hukuman: Anino ng Kabataan</title>
+
+    <style>
+        /* INTERNAL CSS: LAYOUT, BLOCKING, AT POSITIONING LANG */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 60px;
+            padding: 0 12px;
+            gap: 18px;
+            position: relative;
+            z-index: 5;
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        .menu-btn,
+        .header-icon {
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            display: block;
+            width: 220px;
+            height: auto;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 4px 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 8px 12px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex: 1;
+            height: 100%;
+            gap: 15px;
+        }
+
+        nav a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -260px;
+            width: 260px;
+            height: 100vh;
+            padding-top: 60px;
+            z-index: 10;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px 25px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        #menu-toggle:checked~.sidebar {
+            left: 0;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 8;
+        }
+
+        #menu-toggle:checked~.overlay {
+            display: block;
+        }
+
+
+        /* ARTICLE AT RIGHT ASIDE */
+        .page {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 272px;
+            align-items: start;
+            gap: 28px;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 22px 3.5% 28px;
+        }
+
+        main {
+            min-width: 0;
+        }
+
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            margin-bottom: 16px;
+        }
+
+        .byline-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 13px;
+            margin: 18px 0 20px;
+        }
+
+        .author-icon {
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            width: 29px;
+            height: 29px;
+            border-radius: 50%;
+        }
+
+        .separator {
+            height: 20px;
+        }
+
+        .share {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-left: auto;
+        }
+
+        .share a {
+            display: grid;
+            place-items: center;
+            width: 29px;
+            height: 29px;
+            border-radius: 50%;
+        }
+
+        .hero-photo {
+            margin: 0 0 24px;
+        }
+
+        .hero-photo img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1.86 / 1;
+            object-fit: cover;
+        }
+
+        .article-body {
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .article-body p {
+            margin: 0 0 16px;
+        }
+
+        .article-sidebar {
+            display: block;
+            position: static;
+            min-width: 0;
+            width: 100%;
+            padding-top: 16px;
+        }
+
+        .popular-item {
+            display: grid;
+            grid-template-columns: 28px 92px minmax(0, 1fr);
+            align-items: start;
+            gap: 7px;
+            padding: 13px 0;
+        }
+
+        .rank {
+            display: grid;
+            place-items: center;
+            width: 27px;
+            height: 27px;
+            border-radius: 50%;
+        }
+
+        .popular-item img {
+            display: block;
+            width: 92px;
+            height: 68px;
+            object-fit: cover;
+        }
+
+        .mojo-ad {
+            margin-top: 24px;
+        }
+
+        .mojo-ad img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 22px 4%;
+        }
+
+        .footer-logo {
+            display: block;
+            width: 245px;
+            max-width: 32%;
+            height: auto;
+        }
+
+        .footer-motto {
+            padding-left: 24px;
+        }
+
+        .socials {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+        }
+
+        .footer-links {
+            padding-left: 24px;
+        }
+
+        .copyright {
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+
+<body style="margin:0; background:#fbfcfa; color:#102d4e; font-family:Arial, Helvetica, sans-serif;">
+  <header style="background-color: #f8f8f4; border-bottom: 3px solid #e6c84b">
+        <input id="menu-toggle" type="checkbox" />
+        <label class="menu-btn" for="menu-toggle" style="font-size: 23px; color: #092448; cursor: pointer">☰</label>
+        <!-- SIDEBAR -->
+        <div class="sidebar" style="padding-top: 60px; background-color: #092448; transition: left 0.3s">
+            <label class="close-btn" for="menu-toggle" style="color: white; font-size: 30px; cursor: pointer">×</label>
+            <a href="index.html" style="color: white; text-decoration: none">Home</a>
+            <a href="News.html" style="color: white; text-decoration: none">News</a>
+            <a href="Opinyon.html" style="color: white; text-decoration: none">Opinyon</a>
+            <a href="Isports.html" style="color: white; text-decoration: none">iSports</a>
+            <a href="Lathalain.html" style="color: white; text-decoration: none">Lathalain</a>
+            <a href="Agham.html" style="color: white; text-decoration: none">Agham</a>
+            <a href="Multimedia.html" style="color: white; text-decoration: none">Multimedia</a>
+        </div>
+        <label class="overlay" for="menu-toggle" style="background: rgba(0, 0, 0, 0.4); cursor: pointer"></label>
+        <!-- LOGO -->
+        <div class="logo">
+            <img alt="Ang Gabay Online Student Publication" src="gabayLOGO.png" />
+        </div>
+        <!-- NAVIGATION -->
+        <nav>
+            <a href="index.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">HOME</a>
+            <a href="News.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">NEWS</a>
+            <a href="Opinyon.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">OPINYON</a>
+            <a href="Isports.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">ISPORTS</a>
+            <a href="Lathalain.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">LATHALAIN</a>
+            <a href="Agham.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">AGHAM</a>
+            <a class="active" href="Multimedia.html"
+                style="color: #17263a; text-decoration: none; font-size: 10px; font-weight: bold; white-space: nowrap; border-bottom: 3px solid transparent">MULTIMEDIA</a>
+        </nav>
+        <a aria-label="User" class="header-icon" href="signup.html"
+            style="color: #092448; font-size: 20px; text-decoration: none">♟ </a>
+    </header>
+
+    <!-- PAGE GRID -->
+    <div class="page">
+
+        <!-- MAIN ARTICLE -->
+        <main>
+            <div class="breadcrumbs" style="font-size:12px; font-weight:bold;">
+                <a href="index.html"
+                    style="color:#092849; text-decoration:none; font-size:18px;">⌂</a>
+                <span>/</span>
+                <span>OPINYON</span>
+                <span>/</span>
+                <span>KABATAAN</span>
+            </div>
+
+            <article>
+                <h1 style="margin:0 0 8px; color:#092849; font-family:Georgia, 'Times New Roman', serif; font-size:clamp(34px, 4.2vw, 52px); line-height:1.02; letter-spacing:-.7px;">
+                    Hukuman: Anino ng Kabataan
+                </h1>
+
+                <p style="max-width:850px; margin:12px 0 18px; color:#263d53; font-family:Georgia, 'Times New Roman', serif; font-size:18px; line-height:1.45;">
+                    Nagsisilbi ang batas bilang ilaw na gumagabay sa kabataan; dapat itong magbigay-linaw, hindi anino ng takot.
+                </p>
+
+                <div class="byline-row" style="color:#405268; font-size:12px;">
+                    <span class="author-icon" style="background:#0a2c4f; color:white; font-size:18px;">♟</span>
+                    <span>By <strong>CHRISTIANJADE MONTE</strong></span>
+                    <span class="separator" style="border-left:1px solid #aab4bd;"></span>
+                    <span>Opinyon</span>
+                    <span class="separator" style="border-left:1px solid #aab4bd;"></span>
+                    <span>4 min read</span>
+
+                    <div class="share">
+                        <span>Ibahagi:</span>
+                        <a href="#" aria-label="Facebook"
+                            style="background:#092849; color:white; font-weight:bold; text-decoration:none;">f</a>
+                        <a href="#" aria-label="X"
+                            style="background:#092849; color:white; font-weight:bold; text-decoration:none;">𝕏</a>
+                        <a href="#" aria-label="Copy link"
+                            style="background:#092849; color:white; font-weight:bold; text-decoration:none;">↗</a>
+                    </div>
+                </div>
+
+                <figure class="hero-photo">
+                    <img src="forOP1.jpg" alt="Mga kabataang sumasagisag sa usapin ng batas at pananagutan">
+                    <figcaption style="color:#5c6b7a; font-size:11px; line-height:1.45;">
+                        Dapat maging gabay ang batas sa kabataan habang isinasaalang-alang ang kanilang karapatan, pag-unlad, at kinabukasan. | Larawang pang-ilustrasyon
+                    </figcaption>
+                </figure>
+
+                <div class="article-body" style="color:#243d54;">
+
+                    <p>
+                        Nagsisilbi ang batas bilang ilaw na gumagabay sa kabataan; dapat itong magbigay-linaw—hindi anino ng takot.
+                    </p>
+
+                    <p>
+                        Habang patuloy na tumataas ang kaso ng krimen na sangkot ang kabataan, sinuportahan ng Philippine National Police (PNP) ang panukalang ibaba sa 12 ang edad ng criminal responsibility. Gayunman, hindi ito sapat na solusyon sa mas malalim na problema.
+                    </p>
+
+                    <p>
+                        Naniniwala ang PNP na magsisilbi itong paraan upang mapanagot ang mga batang lumalabag sa batas, ngunit hindi nito lubos na tinutugunan ang pangangailangan ng kabataan sa gabay at proteksyon.
+                    </p>
+
+                    <p>
+                        Kagaya na lamang ng pamamaril sa Tacloban City na kinasangkutan ng dalawang menor de edad at nagdulot ng trahedya. Gayunpaman, hindi nito pinatutunayan na lahat ng 12-anyos ay handa nang umunawa sa bigat ng kanilang mga aksyon.
+                    </p>
+
+                    <p>
+                        Mabilis ngunit mababaw na tugon ang pagpapababa ng edad ng pagkakulong. Dapat tuunan ng pansin ang mismong ugat ng problema, tulad ng kahirapan at impluwensya ng kapaligiran.
+                    </p>
+
+                    <p>
+                        Patuloy na hinuhubog at natututo ang mga kabataan sa ganitong edad mula sa kanilang kapaligiran. Ang maagang pagpapataw ng ganitong sentensya ay maaaring makasira sa kanilang pag-unlad.
+                    </p>
+
+                    <p>
+                        Nais ng panukalang ito na isulong ang mabuting layunin, katulad ng pagbabawas ng krimeng sangkot ang kabataan. Ngunit maaari rin itong maging sanhi ng paglalagay sa panganib ng kanilang kinabukasan.
+                    </p>
+
+                    <p>
+                        Mainam na solusyon ang pagpapalakas ng edukasyon, counseling, at mga programang pangkomunidad para sa kabataan. Sa ganitong paraan, maaaring mapigilan ang krimen bago pa ito mangyari.
+                    </p>
+
+                    <p>
+                        Dapat ding ituon ang pansin sa rehabilitasyon kaysa parusa. Ang pagbibigay ng pagkakataong magbago ay mas makatao at maaaring maging mas epektibo sa pangmatagalang pag-unlad ng kabataan.
+                    </p>
+
+                    <blockquote style="margin:22px 0; padding:20px 22px; border-left:6px solid #f0cf36; background:#fff9e6; color:#173858; font-family:Georgia, 'Times New Roman', serif; font-size:18px; font-style:italic; line-height:1.5;">
+                        “Kung ang batas ay isang ilaw na gumagabay sa kabataan, dapat itong manatiling tanglaw ng pag-asa—hindi apoy na susunog sa kanilang kinabukasan.”
+                        <cite style="display:block; margin-top:12px; font-family:Arial, sans-serif; font-size:12px; font-style:normal; font-weight:bold;">
+                            — Christianjade Monte
+                        </cite>
+                    </blockquote>
+
+                </div>
+            </article>
+        </main>
+
+        <aside class="article-sidebar">
+
+            <h2 style="margin:0 0 7px; padding:14px 12px; background:#f1f5f7; border-left:5px solid #f0cf36; color:#102d4e; font-family:Georgia, 'Times New Roman', serif; font-size:23px; text-transform:uppercase;">
+                Pinakabasa
+            </h2>
+
+            <a class="popular-item" href="THIRDNEWS.html"
+                style="color:#102d4e; text-decoration:none; border-bottom:1px solid #dfe4e8;">
+                <span class="rank" style="background:#092849; color:white; font-family:Georgia, serif; font-size:15px; font-weight:bold;">1</span>
+                <img src="forNews3.jpg" alt="Balita tungkol sa palakasan">
+                <div>
+                    <h3 style="margin:0 0 7px; color:#102d4e; font-family:Georgia, 'Times New Roman', serif; font-size:13px; line-height:1.28;">
+                        PNP, Kinasuhan ang 15-anyos sa Tacloban Shooting
+                    </h3>
+                    <p style="margin:0; color:#657383; font-size:10px; line-height:1.4;">
+                        Oktubre 15, 2026 · 6 min read
+                    </p>
+                </div>
+            </a>
+
+            <a class="popular-item" href="SECONDOPINYON.html"
+                style="color:#102d4e; text-decoration:none; border-bottom:1px solid #dfe4e8;">
+                <span class="rank" style="background:#092849; color:white; font-family:Georgia, serif; font-size:15px; font-weight:bold;">2</span>
+                <img src="forOP2.jpg" alt="Larawan para sa balitang pangkalikasan">
+                <div>
+                    <h3 style="margin:0 0 7px; color:#102d4e; font-family:Georgia, 'Times New Roman', serif; font-size:13px; line-height:1.28;">
+                       Parehong Pangalan, Parehong Sistema
+                    </h3>
+                    <p style="margin:0; color:#657383; font-size:10px; line-height:1.4;">
+                        Oktubre 14, 2026 · 5 min read
+                    </p>
+                </div>
+            </a>
+
+            <a class="popular-item" href="FIFTH AGHAM.html"
+                style="color:#102d4e; text-decoration:none; border-bottom:1px solid #dfe4e8;">
+                <span class="rank" style="background:#092849; color:white; font-family:Georgia, serif; font-size:15px; font-weight:bold;">3</span>
+                <img src="forAgham5.jpg" alt="Mga gamot at produktong pangkalusugan">
+                <div>
+                    <h3 style="margin:0 0 7px; color:#102d4e; font-family:Georgia, 'Times New Roman', serif; font-size:13px; line-height:1.28;">
+                        Lunas o Lason?
+                    </h3>
+                    <p style="margin:0; color:#657383; font-size:10px; line-height:1.4;">
+                        AGHAM EDITORIAL · 3 min read
+                    </p>
+                </div>
+            </a>
+
+            <a class="popular-item" href="SECONDLATHALAIN.html"
+                style="color:#102d4e; text-decoration:none; border-bottom:1px solid #dfe4e8;">
+                <span class="rank" style="background:#092849; color:white; font-family:Georgia, serif; font-size:15px; font-weight:bold;">4</span>
+                <img src="forLAT2.webp" alt="Body Shaming editoryal">
+                <div>
+                    <h3 style="margin:0 0 7px; color:#102d4e; font-family:Georgia, 'Times New Roman', serif; font-size:13px; line-height:1.28;">
+                        Mga salitang mas mabigat pa sa timbang.
+                    </h3>
+                    <p style="margin:0; color:#657383; font-size:10px; line-height:1.4;">
+                        Oktubre 10, 2026 · 3 min read
+                    </p>
+                </div>
+            </a>
+
+            <a class="popular-item" href="FOURTHSPORTS.html"
+                style="color:#102d4e; text-decoration:none; border-bottom:1px solid #dfe4e8;">
+                <span class="rank" style="background:#092849; color:white; font-family:Georgia, serif; font-size:15px; font-weight:bold;">5</span>
+                <img src="forSports4.avif" alt="Bata na tired">
+                <div>
+                    <h3 style="margin:0 0 7px; color:#102d4e; font-family:Georgia, 'Times New Roman', serif; font-size:13px; line-height:1.28;">
+                       Medalya o Marka: Ang Dobleng Laban ng Atleta
+                    </h3>
+                    <p style="margin:0; color:#657383; font-size:10px; line-height:1.4;">
+                        Oktubre 9, 2026 · 4 min read
+                    </p>
+                </div>
+            </a>
+
+            <!-- MOJO BANNER -->
+            <div class="mojo-ad">
+                <img src="bannerGilid.png" alt="MOJO: Mutya ng Kabataan">
+            </div>
+
+        </aside>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer"
+        style="background:#062b50; color:white; border-top:1px solid #e7c735;">
+
+        <img class="footer-logo" src="logoFooter.png"
+            alt="ANG GABAY Online Student Publication">
+
+        <div class="footer-motto"
+            style="border-left:1px solid #d7e0e8; font-family:Georgia, serif; font-size:13px; font-style:italic; line-height:1.5;">
+            Para sa Kabataan.<br>
+            Para sa Kinabukasan.
+        </div>
+
+        <div class="socials" style="font-size:15px;">
+            <a href="#" aria-label="Facebook" style="color:white; text-decoration:none;">●</a>
+            <a href="#" aria-label="Instagram" style="color:white; text-decoration:none;">◎</a>
+            <a href="#" aria-label="YouTube" style="color:white; text-decoration:none;">▶</a>
+            <a href="#" aria-label="X" style="color:white; text-decoration:none;">𝕏</a>
+        </div>
+
+        <div class="footer-links"
+            style="border-left:1px solid #d7e0e8; font-size:11px;">
+            News | Opinyon | Isports | Lathalain | Agham | Multimedia
+        </div>
+
+        <div class="copyright" style="color:#dbe3ec; font-size:9px;">
+            © 2026 Ang Gabay. Lahat ng karapatan ay nakalaan.
+        </div>
+
+    </footer>
+
+</body>
+</html>
